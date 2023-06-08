@@ -2,6 +2,12 @@
   "name": "messenger-web",
   "version": "0.0.0",
   "private": true,
+  "keywords": [
+    "messenger",
+    "react",
+    "nextjs"
+  ],
+  "author": "Weajer Zon<weajer.zon@gmail.com>",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -31,6 +37,8 @@
     "typescript": "5.1.3"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@weajer/eslint-config": "^0.0.1",
     "simple-git-hooks": "^2.8.1"
   },
   "packageManager": "pnpm@8.5.1",
