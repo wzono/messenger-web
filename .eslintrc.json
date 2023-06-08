@@ -1,5 +1,5 @@
 {
-  "extends": ["@weajer", "next/core-web-vitals"],
+  "extends": ["@wzono", "next/core-web-vitals"],
   "rules": {
     "semi": [2, "always"],
     "eol-last": ["error", "always"],
