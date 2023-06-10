@@ -1,23 +1,23 @@
-import clsx from 'clsx';
-import { ButtonHTMLAttributes } from 'react';
+import clsx from 'clsx'
+import type { ButtonHTMLAttributes } from 'react'
 
-type ButtonTypes = 'primary' |'secondary' | 'error';
+type ButtonTypes = 'primary' |'secondary' | 'error'
 
 interface Props {
   htmlType?: ButtonHTMLAttributes<any>['type']
-  children: React.ReactNode;
-  block?: boolean;
-  onClick?: () => void;
-  type?: ButtonTypes;
-  disabled?: boolean;
+  children: React.ReactNode
+  block?: boolean
+  onClick?: () => void
+  type?: ButtonTypes
+  disabled?: boolean
 }
 
 type NativeAttrs = Omit<React.ButtonHTMLAttributes<any>, keyof Props>
 
-export type ButtonProps = Props & NativeAttrs;
+export type ButtonProps = Props & NativeAttrs
 
 const Button = (props: ButtonProps) => {
-  const { children, onClick, type = 'primary', disabled, htmlType, className, block, ...rest } = props;
+  const { children, onClick, type = 'primary', disabled, htmlType, className, block, ...rest } = props
   return (
     <button
       {...rest}
@@ -39,7 +39,7 @@ const Button = (props: ButtonProps) => {
     >
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

@@ -1,48 +1,49 @@
-'use client';
+'use client'
 
-import Button from '@/app/components/Button';
-import Input from '@/app/components/inputs/Input';
-import { useCallback, useState } from 'react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useCallback, useState } from 'react'
+import type { FieldValues, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import Button from '@/app/components/Button'
+import Input from '@/app/components/inputs/Input'
 
 type Variant = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
-  const [variant, setVariant] = useState<Variant>('LOGIN');
+  const [variant, setVariant] = useState<Variant>('LOGIN')
   // state loading
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // toggle variant
   const toggleVariant = useCallback(() => {
-    setVariant(variant === 'LOGIN' ? 'REGISTER' : 'LOGIN');
-  }, [variant]);
+    setVariant(variant === 'LOGIN' ? 'REGISTER' : 'LOGIN')
+  }, [variant])
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: '',
       email: '',
-      password: ''
-    }
-  });
+      password: '',
+    },
+  })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setLoading(true);
+    setLoading(true)
     // if (variant === 'LOGIN') {
     // }
 
     // if (variant === 'REGISTER') {
     // }
 
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const socialAction = (action: string) => {
-    setLoading(true);
-  };
+    setLoading(true)
+  }
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -87,7 +88,7 @@ const AuthForm = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AuthForm;
+export default AuthForm

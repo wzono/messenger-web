@@ -1,17 +1,17 @@
-import clsx from 'clsx';
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import clsx from 'clsx'
+import type { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 interface InputProps {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
+  label: string
+  name: string
+  type?: string
+  required?: boolean
   register: UseFormRegister<FieldValues>
   errors: FieldErrors
-  disabled?: boolean;
+  disabled?: boolean
 }
 const Input = (props: InputProps) => {
-  const { label, name, type, required, register, disabled, errors } = props;
+  const { label, name, type, required, register, disabled, errors } = props
   return (
     <div>
       <label
@@ -49,7 +49,7 @@ const Input = (props: InputProps) => {
             sm:leading-6
           `,
           errors[name] && 'focus:ring-rose-500',
-          disabled && 'opacity-50 cursor-default'
+          disabled && 'opacity-50 cursor-default',
           )}
           disabled={disabled}
           id={name}
@@ -58,7 +58,7 @@ const Input = (props: InputProps) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input
