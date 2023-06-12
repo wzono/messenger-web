@@ -127,6 +127,21 @@ const AuthForm = () => {
             </AuthSocialButton>
           </div>
         </div>
+
+        <div
+          className="mt-6 flex justify-center text-sm px-2 text-gray-500 gap-2"
+        >
+          <div>
+            {variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}
+          </div>
+
+          <div
+            className="underline cursor-pointer"
+            onClick={toggleVariant}
+          >
+            {variant === 'LOGIN' ? 'Create an account' : 'Login'}
+          </div>
+        </div>
       </div>
 
     </div>
