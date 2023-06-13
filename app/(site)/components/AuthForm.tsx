@@ -4,11 +4,27 @@ import { useCallback, useState } from 'react'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
+import { toast } from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
 import AuthSocialButton from './AuthSocialButton'
 import Button from '@/app/components/Button'
 import Input from '@/app/components/inputs/Input'
 
 type Variant = 'LOGIN' | 'REGISTER'
+
+function signup(data: FieldValues) {
+  return fetch('/api/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(r => r.json())
+    .then(body => {
+      if (body.error) throw new Error(body.error)
+    })
+}
 
 const AuthForm = () => {
   const [variant, setVariant] = useState<Variant>('LOGIN')
@@ -33,18 +49,54 @@ const AuthForm = () => {
   })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setLoading(true)
-    // if (variant === 'LOGIN') {
-    // }
+    if (variant === 'LOGIN') {
+      setLoading(true)
+      signIn('credentials', {
+        ...data,
+        redirect: false,
+      })
+        .then((res) => {
+          if (res?.error) {
+            toast.error(`login failed: ${res.error}`)
+            return
+          }
 
-    // if (variant === 'REGISTER') {
-    // }
+          res?.ok && toast.success('login success')
+        })
+        .finally(() => setLoading(false))
+    }
 
-    setLoading(false)
+    if (variant === 'REGISTER') {
+      setLoading(true)
+      signup(data)
+        .then(user => {
+          toast.success('register success')
+          // eslint-disable-next-line no-console
+          console.debug(user)
+        })
+        .catch(error => {
+          toast.error(`register failed: ${error.message}`)
+          console.error(error)
+        })
+        .finally(() => setLoading(false))
+    }
   }
 
-  const socialAction = (action: string) => {
+  const socialAction = (action: 'github' | 'google') => {
     setLoading(true)
+
+    signIn(action, {
+      redirect: false,
+    })
+      .then((res) => {
+        if (res?.error) {
+          toast.error(`login failed: ${res.error}`)
+          return
+        }
+
+        res?.ok && toast.success('login success')
+      })
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -119,13 +171,13 @@ const AuthForm = () => {
           <div className="mt-6 flex gap-4">
             <AuthSocialButton
               icon={BsGithub}
-              onClick={() => socialAction('Github')}
+              onClick={() => socialAction('github')}
             >
               Github
             </AuthSocialButton>
             <AuthSocialButton
               icon={BsGoogle}
-              onClick={() => socialAction('Google')}
+              onClick={() => socialAction('google')}
             >
               Google
             </AuthSocialButton>

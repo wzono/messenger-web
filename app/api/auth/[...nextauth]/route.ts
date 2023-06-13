@@ -28,15 +28,15 @@ const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) throw new Error('Invalid credentials')
+        if (!credentials?.email || !credentials?.password) throw new Error('Missing credentials')
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         })
 
-        if (!user || !user.hashedPassword) throw new Error('Invalid credentials')
+        if (!user || !user.hashedPassword) throw new Error('User not found')
 
-        const matched = await bcrypt.compare(user.hashedPassword, credentials.password)
+        const matched = await bcrypt.compare(credentials.password, user.hashedPassword)
 
         if (!matched) throw new Error('Invalid credentials')
 

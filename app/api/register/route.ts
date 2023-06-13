@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
+import { prisma } from '@/app/libs/prisma-db'
 
 export async function POST(req: Request) {
   try {
@@ -27,6 +28,6 @@ export async function POST(req: Request) {
   }
   catch (error: any) {
     console.error('register user error', error)
-    return NextResponse.json({ error })
+    return NextResponse.json({ error }, { status: 500 })
   }
 }
