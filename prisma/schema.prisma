@@ -10,15 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// 固定格式 User/Account
+// https://authjs.dev/reference/adapters#models
 model User {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
-  email          String?  @unique
-  emailVerified  Boolean?
+  email          String?   @unique
+  emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   conversationIds String[]       @db.ObjectId
   conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
@@ -36,13 +38,13 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
-  expires_at        Int?
-  token_type        String?
+  refresh_token     String? @map("refreshToken") @db.String
+  access_token      String? @map("access_token") @db.String
+  expires_at        Int?    @map("expiresAt")
+  token_type        String? @map("tokenType")
   scope             String?
-  id_token          String? @db.String
-  session_state     String?
+  id_token          String? @map("idToken") @db.String
+  session_state     String? @map("sessionState")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
