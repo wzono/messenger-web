@@ -12,7 +12,7 @@ import Input from '@/app/components/inputs/Input'
 
 type Variant = 'LOGIN' | 'REGISTER'
 
-function signup(data: FieldValues) {
+function signUp(data: FieldValues) {
   return fetch('/api/register', {
     method: 'POST',
     headers: {
@@ -68,7 +68,7 @@ const AuthForm = () => {
 
     if (variant === 'REGISTER') {
       setLoading(true)
-      signup(data)
+      signUp(data)
         .then(user => {
           toast.success('register success')
           // eslint-disable-next-line no-console
