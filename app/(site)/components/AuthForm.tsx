@@ -1,11 +1,12 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import AuthSocialButton from './AuthSocialButton'
 import Button from '@/app/components/Button'
 import Input from '@/app/components/inputs/Input'
@@ -98,6 +99,14 @@ const AuthForm = () => {
       })
       .finally(() => setLoading(false))
   }
+
+  const session = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session?.status === 'authenticated')
+      router.push('/users')
+  }, [session.status, router])
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
