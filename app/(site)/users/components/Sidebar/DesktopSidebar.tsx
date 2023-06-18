@@ -37,7 +37,7 @@ interface DesktopItemProps {
   onClick?: () => void
 }
 
-export const DesktopItem = ({ href, onClick, active, icon: Icon, label }: DesktopItemProps) => {
+const DesktopItem = ({ href, onClick, active, icon: Icon, label }: DesktopItemProps) => {
   const handleClick = () => {
     return onClick?.()
   }
