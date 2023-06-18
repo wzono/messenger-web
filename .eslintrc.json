@@ -1,3 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "@wzono"]
+  "extends": ["next/core-web-vitals", "@wzono"],
+  "rules": {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error", { "variables": false }]
+  }
 }

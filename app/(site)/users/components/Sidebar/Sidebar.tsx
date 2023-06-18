@@ -1,4 +1,4 @@
-import DesktopSidebar from './DesktopSidebar'
+import { DesktopSidebar } from './DesktopSidebar'
 
 export async function Sidebar(
   { children }: { children: React.ReactNode },
