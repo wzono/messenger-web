@@ -5,8 +5,8 @@ declare global {
   var prisma: PrismaClient
 }
 
-const prisma = globalThis.prisma || new PrismaClient()
+const prismaClinet = globalThis.prisma || new PrismaClient()
 
-if (process.env.NODE_ENV === 'production') globalThis.prisma = prisma
+if (process.env.NODE_ENV === 'production') globalThis.prisma = prismaClinet
 
-export { prisma }
+export { prismaClinet }

@@ -2,9 +2,13 @@
 
 import Link from 'next/link'
 import clsx from 'clsx'
+import type { User } from '@prisma/client'
 import { useRoutes } from '@/app/hooks/useRoutes'
 
-export const DesktopSidebar = () => {
+interface DesktopSidebarProps {
+  user: User | null
+}
+export const DesktopSidebar = ({ user }: DesktopSidebarProps) => {
   const routes = useRoutes()
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:w-20 lg:z-40 lg:bg-white lg:overflow-y-auto lg:border-r xl:px-6 lg:pb-4 lg:flex lg:flex-col justify-between">
